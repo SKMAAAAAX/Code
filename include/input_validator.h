@@ -5,13 +5,13 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-#include <errno.h> // 添加错误处理支持
+#include <errno.h>
 
 // 检查一个字符串是否为单个整数
 static int isValidSingleInteger(const char *str)
 {
     const unsigned char *s = (const unsigned char *)str;
-    int hasDigits = 0; // 新增：检查是否包含数字
+    int hasDigits = 0;
 
     // 跳过前导空格
     while (isspace(*s))
@@ -47,9 +47,6 @@ static int getValidInteger(int min, int max)
 
     while (1)
     {
-        printf("\n请输入一个整数 (%d-%d): ", min, max);
-        fflush(stdout); // 确保提示立即显示
-
         // EOF 检查
         if (!fgets(input, sizeof(input), stdin))
         {
@@ -63,7 +60,7 @@ static int getValidInteger(int min, int max)
             int c;
             while ((c = getchar()) != '\n' && c != EOF)
                 ;
-            printf("输入过长，请重试\n");
+            printf("请重新输入: ");
             continue;
         }
 
@@ -73,7 +70,7 @@ static int getValidInteger(int min, int max)
         // 检查输入是否为空或仅包含空格
         if (!isValidSingleInteger(input))
         {
-            printf("无效输入，请输入一个整数\n");
+            printf("请输入一个整数: ");
             continue;
         }
 
@@ -81,17 +78,10 @@ static int getValidInteger(int min, int max)
         errno = 0;
         number = strtol(input, &endptr, 10);
 
-        // 检查转换错误
-        if (errno == ERANGE)
+        // 检查转换错误和范围
+        if (errno == ERANGE || number < min || number > max)
         {
-            printf("数字超出范围\n");
-            continue;
-        }
-
-        // 范围检查
-        if (number < min || number > max)
-        {
-            printf("输入必须在 %d 到 %d 之间\n", min, max);
+            printf("请输入 %d-%d 之间的整数: ", min, max);
             continue;
         }
 
