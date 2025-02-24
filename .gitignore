@@ -1,0 +1,9 @@
+# 忽略所有文件
+*
+
+# 不忽略 input_validator.h 和其所在目录
+!include/
+!include/input_validator.h
+
+# 不忽略 .gitignore
+!.gitignore
