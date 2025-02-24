@@ -9,56 +9,62 @@
 // 检查一个字符串是否为单个整数
 static int isValidSingleInteger(const char *str)
 {
+    const unsigned char *s = (const unsigned char *)str;
+
     // 跳过前导空格
-    while (isspace((unsigned char)*str))
-        str++;
-    if (*str == '\0')
+    while (isspace(*s))
+        s++;
+    if (*s == '\0')
         return 0; // 空字符串
 
-    // 处理正负号
-    if (*str == '+' || *str == '-')
-        str++;
+    // 处理可选正负号
+    if (*s == '+' || *s == '-')
+        s++;
 
-    if (!isdigit((unsigned char)*str))
+    // 必须至少有一个数字
+    if (!isdigit(*s))
         return 0;
 
     // 跳过所有数字
-    while (isdigit((unsigned char)*str))
-        str++;
+    while (isdigit(*s))
+        s++;
+
     // 跳过尾随空格
-    while (isspace((unsigned char)*str))
-        str++;
+    while (isspace(*s))
+        s++;
 
     // 必须恰好到字符串末尾才算合法
-    return (*str == '\0');
+    return (*s == '\0');
 }
 
 // 获取指定范围内的有效整数
 static int getValidInteger(int min, int max)
 {
     char input[100];
-    long number;
-    char *endptr;
 
     while (1)
     {
-        // 如果遇到 EOF（例如按 Ctrl+D），则退出程序
-        if (fgets(input, sizeof(input), stdin) == NULL)
+        // 如果遇到 EOF（例如按 Ctrl+D 或 Ctrl+Z），则退出程序
+        if (!fgets(input, sizeof(input), stdin))
         {
             printf("\n退出程序...\n");
             exit(0);
         }
 
         // 去掉行尾换行符
-        input[strcspn(input, "\n")] = '\0';
+        char *pos = strchr(input, '\n');
+        if (pos)
+            *pos = '\0';
 
+        // 检查是否为单个整数
         if (!isValidSingleInteger(input))
         {
             printf("请输入单个整数（%d-%d）：", min, max);
             continue;
         }
 
-        number = strtol(input, &endptr, 10);
+        // 转换为 long，再检查范围
+        long number = strtol(input, NULL, 10);
         if (number >= min && number <= max)
             return (int)number;
 
