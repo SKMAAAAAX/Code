@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "stdio.h": "c",
-        "input_validator.h": "c",
-        "cjson.h": "c"
-    }
-}
