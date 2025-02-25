@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h> // fabs 函数需要
+#include <math.h> 
 
 // 三次方程系数、迭代变量
 double coefficientA, coefficientB, coefficientC, coefficientD, currentX;
