@@ -21,6 +21,16 @@
 double coefficientA, coefficientB, coefficientC, coefficientD, currentX;
 
 /**
+ * 清空输入缓冲区
+ */
+void clearInputBuffer()
+{
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF)
+        ;
+}
+
+/**
  * 计算牛顿迭代法中的 f(x)/f'(x) 值
  *
  * @param x 当前迭代点的x值
@@ -41,32 +51,62 @@ double calculateDelta(double x)
 int main()
 {
     int iterationCount;
+    int inputStatus;
+
     system("cls"); // 清屏，提供更好的用户体验
 
     // 输入方程系数
     printf("三次方程：f(x) = ax³+bx²+cx+d\n");
-    printf("输入 a, b, c, d 的值：");
-    if (scanf("%lf %lf %lf %lf", &coefficientA, &coefficientB, &coefficientC, &coefficientD) != 4 ||
-        (!coefficientA && !coefficientB && !coefficientC && !coefficientD))
+
+    while (1)
     {
-        printf("输入有误\n");
-        return 0; // 输入错误或方程为常数0，无法求解
+        printf("输入 a, b, c, d 的值：");
+        inputStatus = scanf("%lf %lf %lf %lf", &coefficientA, &coefficientB, &coefficientC, &coefficientD);
+        clearInputBuffer(); // 清空输入缓冲区
+
+        if (inputStatus == 4 && !(coefficientA == 0 && coefficientB == 0 &&
+                                  coefficientC == 0 && coefficientD == 0))
+        {
+            break; // 输入有效
+        }
+        else
+        {
+            printf("输入有误，请重新输入！\n");
+        }
     }
 
     // 输入初始迭代值
-    printf("起始 x= ");
-    if (scanf("%lf", &currentX) != 1)
+    while (1)
     {
-        printf("输入有误\n");
-        return 0;
+        printf("起始 x= ");
+        inputStatus = scanf("%lf", &currentX);
+        clearInputBuffer(); // 清空输入缓冲区
+
+        if (inputStatus == 1)
+        {
+            break; // 输入有效
+        }
+        else
+        {
+            printf("输入有误，请重新输入一个有效的实数！\n");
+        }
     }
 
     // 输入最大迭代次数
-    printf("输入迭代次数：");
-    if (scanf("%d", &iterationCount) != 1 || iterationCount < 1)
+    while (1)
     {
-        printf("输入有误\n");
-        return 0; // 迭代次数必须为正整数
+        printf("输入迭代次数：");
+        inputStatus = scanf("%d", &iterationCount);
+        clearInputBuffer(); // 清空输入缓冲区
+
+        if (inputStatus == 1 && iterationCount >= 1)
+        {
+            break; // 输入有效
+        }
+        else
+        {
+            printf("输入有误，请重新输入一个正整数！\n");
+        }
     }
 
     // 显示迭代结果表头
