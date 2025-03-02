@@ -105,5 +105,5 @@ int main()
                 printf("%lld\n", i);
         }
     }
-    
+    return 0;
 }
