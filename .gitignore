@@ -3,6 +3,7 @@
 
 # 不忽略牛顿迭代程序及其头文件目录
 !NewtonIteration.c
+!isPrimeNum.c
 
 # 不忽略 .gitignore
 !.gitignore
