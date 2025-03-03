@@ -4,13 +4,17 @@
 // 定义数字类型枚举
 enum TypeOfNum
 {
-    prime,      // 质数
-    Composite   // 合数
+    prime,    // 质数
+    Composite // 合数
 };
 
 // 判断一个数是否为质数
 enum TypeOfNum isPrimeNum(long long int num)
 {
+    if (num <= 1)
+        return Composite; 
+    if (num == 2 || num == 3)
+        return prime; 
     if (num % 2 == 0 || num % 3 == 0)
         return Composite;
     for (long long int i = 5; i * i <= num; i += 6)
@@ -22,7 +26,8 @@ enum TypeOfNum isPrimeNum(long long int num)
 }
 
 int main()
-{   system("cls");
+{
+    system("cls");
     printf("1.判断单一数字是否为质数\n");
     printf("2.判断范围内的数字是否为质数\n");
     printf("输入选项(1或2)：");
@@ -34,7 +39,7 @@ int main()
         printf("1.判断单一数字是否为质数\n");
         printf("2.判断范围内的数字是否为质数\n");
         printf("输入选项(1或2)：");
-        while (getchar() != '\n')  // 清空输入缓冲区
+        while (getchar() != '\n') // 清空输入缓冲区
             ;
     }
     if (option == 1)
@@ -71,7 +76,8 @@ int main()
         }
         return 0;
     }
-    else{
+    else
+    {
         system("cls");
         printf("输入起始数字：");
         long long int start, end;
@@ -98,12 +104,20 @@ int main()
         // 显示结果
         system("cls");
         printf("范围内的质数有：\n");
-
+        int count = 0;
         for (long long int i = start; i <= end; i++)
         {
             if (isPrimeNum(i) == prime)
-                printf("%lld\n", i);
+            {
+                printf("%lld\t", i);
+                count++;
+                if (count % 5 == 0)
+                    printf("\n");
+            }
         }
+        if (count % 5 != 0)
+            printf("\n");
+        printf("范围内的质数数量为：%d\n", count);
+        return 0;
     }
-    return 0;
 }
