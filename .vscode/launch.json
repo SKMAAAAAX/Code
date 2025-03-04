@@ -1,0 +1,32 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // 配置名称：在调试面板可见
+            "name": "C/C++: gcc.exe build and debug active file (bin)",
+            // 调试器类型
+            "type": "cppdbg",
+            // 请求类型：launch表示启动调试
+            "request": "launch",
+            // 将可执行文件路径改为 bin 目录
+            "program": "${fileDirname}/bin/${fileBasenameNoExtension}.exe",
+            
+            "args": [],               // 传递给程序的命令行参数
+            "stopAtEntry": false,     // 是否在main函数开头暂停
+            "cwd": "${fileDirname}",  // 调试时的工作目录 (保持源文件所在的目录即可)
+            "environment": [],
+            "externalConsole": true,  // 是否使用系统外部控制台
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:\\MinGW\\mingw64\\bin\\gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            // 调试前先执行“C/C++: gcc.exe 生成活动文件”任务，确保产生最新的可执行文件
+            "preLaunchTask": "C/C++: gcc.exe 生成活动文件"
+        }
+    ]
+}
