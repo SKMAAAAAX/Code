@@ -1,9 +1,10 @@
 # 忽略所有文件
 *
 
-# 不忽略牛顿迭代程序及其头文件目录
-!NewtonIteration.c
-!isPrimeNum.c
-
-# 不忽略 .gitignore
+# 允许.gitignore本身
 !.gitignore
+
+# 只允许source文件夹及其下的NewtonIteration.c、isPrimeNum.c
+!source/
+!source/NewtonIteration.c
+!source/isPrimeNum.c
