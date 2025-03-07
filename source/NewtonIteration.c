@@ -144,12 +144,8 @@ int main()
 
     // 如果函数值足够接近0，则认为找到了一个有效解
     if (fabs(finalFxValue) <= 1e-6)
-    {
-        printf("方程的一个根为：%.6lf\n", currentX);
-    }
+    printf("方程的一个根为：%.6lf\n", currentX); 
     else
-    {
-        printf("求解失败\n"); // 未能在指定迭代次数内找到足够精确的解
-    }
+    printf("求解失败\n"); // 未能在指定迭代次数内找到足够精确的解 
     return 0;
 }
