@@ -8,3 +8,4 @@
 !source/
 !source/NewtonIteration.c
 !source/isPrimeNum.c
+!source/extractDigits.c
