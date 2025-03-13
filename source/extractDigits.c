@@ -67,7 +67,7 @@ int main(void)
         while (getchar() != '\n')
             ; 
     }
-
+    clearScreen();
     // 提取并显示结果
     extractDigits(num, digits, &count, MAX_DIGITS);
 
