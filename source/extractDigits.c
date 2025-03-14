@@ -31,12 +31,6 @@ void extractDigits(long long num, int digits[], int *count, int maxDigits)
     while (temp > 0)
     {
         (*count)++;
-        if (*count > maxDigits)
-        {
-            printf("警告：数字位数超过数组容量 (%d)，将截断处理\n", maxDigits);
-            *count = maxDigits; 
-            break;
-        }
         temp /= 10;
     }
     // 填入每位数字
